@@ -2,14 +2,6 @@ from tkinter import *
 
 
 class MyFirstGUI:
-    LABEL_TEXT = [
-        "This is our first GUI!",
-        "Actually, this is our second GUI.",
-        "We made it more interesting...",
-        "...by making this label interactive.",
-        "Go on, click on it again.",
-        ]
-    
     def __init__(self, master):
         self.master = master
         self.master.title = "Calculator"
@@ -17,6 +9,7 @@ class MyFirstGUI:
         self.total = 0  # Output value for calculation
         self.entry_value = 0  # track entry value
         
+        # label for total
         self.total_label_text = IntVar()
         self.total_label_text.set(self.total)
         self.total_label = Label(master, textvariable=self.total_label_text)
@@ -40,17 +33,18 @@ class MyFirstGUI:
         
         self.reset_button = Button(master, text="Reset", command=lambda: self.update("reset"))
         
-        self.label.grid(row=0, column=0, sticky=W)
-        self.total_label.grid(row=0, column=1, columnspan=3, sticky=E)
+        # GRID LAYOUT
+        self.label.grid(row=0, column=0, columnspan=2, sticky=N)
+        self.total_label.grid(row=0, column=1, columnspan=2, sticky=S)
         
         self.entry.grid(row=1, column=0)
-        self.add_button.grid(row=2, column=0, sticky=W)
-        self.subtract_button.grid(row=2, column=1, sticky=W)
-        self.multiplication_button.grid(row=2, column=2, sticky=W)
-        self.division_button.grid(row=2, column=3, sticky=W)
-        self.reset_button.grid(row=2, column=4, sticky=W)
-        
-        # END TUTORIAL STUFF HERE
+        self.add_button.grid(row=2, column=0, columnspan=2, sticky=W + E)
+        self.subtract_button.grid(row=2, column=2, columnspan=2, sticky=W + E)
+        self.multiplication_button.grid(row=2, column=4, columnspan=2, sticky=W + E)
+        self.division_button.grid(row=2, column=6, columnspan=2, sticky=W + E)
+        self.reset_button.grid(row=2, column=8, columnspan=2, sticky=W + E)
+    
+    # END TUTORIAL STUFF HERE
     
     def validate(self, new_text) -> bool:
         if not new_text:
@@ -82,5 +76,7 @@ class MyFirstGUI:
 
 
 root = Tk()
+root.geometry('300x300')
+
 my_gui = MyFirstGUI(root)
 root.mainloop()
